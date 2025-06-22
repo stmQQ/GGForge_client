@@ -6,4 +6,5 @@ import svgr from 'vite-plugin-svgr'
 export default defineConfig({
   // base: '/eSports/',
   plugins: [react(), svgr()],
+  base: '/GGForge_client/'
 })

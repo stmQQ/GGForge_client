@@ -12,7 +12,7 @@ import SubmitButton from '../../components/Button/SubmitButton';
 import GameAccount from '../../components/Games/GameAccount';
 import UserInfo from '../../components/User/UserInfo';
 
-const API_URL = 'https://ggforge.onrender.com';
+const API_URL = 'https://ggforge-server.onrender.com';
 const DEFAULT_AVATAR = `${API_URL}/static/avatars/default.png`;
 
 export default function MyProfile() {
@@ -72,7 +72,7 @@ export default function MyProfile() {
       updateUser({ avatar: newAvatar });
       setError('');
     } catch (err) {
-      setError(err.response?.data?.msg || 'Ошибка загрузки аватара');
+      setError(err.response?.data?.msg);
     } finally {
       setIsLoading(false);
     }

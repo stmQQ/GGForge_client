@@ -6,7 +6,7 @@ import { useContext } from 'react';
 const useAuth = () => useContext(AuthContext);
 
 const api = axios.create({
-    baseURL: 'http://localhost:5000/api',
+    baseURL: 'https://ggforge-server.onrender.com/api',
     headers: {
         'Content-Type': 'application/json',
     },

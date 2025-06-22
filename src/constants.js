@@ -16,4 +16,4 @@ export const MATCH_STATUSES = {
   COMPLETED: 'completed'
 }
 
-export const API_URL = 'https://ggforge.onrender.com';
+export const API_URL = 'https://ggforge-server.onrender.com';
