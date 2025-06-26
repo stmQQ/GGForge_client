@@ -36,7 +36,7 @@ export default function Home() {
     fetchTournaments();
   }, []);
 
-  if (isLoading) return <div>Загрузка...</div>;
+  if (isLoading) return <div className='Loading'>Загрузка...</div>;
   if (error) return <div>{error}</div>;
   // if (tournaments.length === 0) return <div>Ближайшие турниры отсутствуют</div>;
 

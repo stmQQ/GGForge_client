@@ -181,7 +181,7 @@ export default function MyProfile() {
           />
           <div className="gameAccountsList">
             {isAccountsLoading ? (
-              <p>Загрузка...</p>
+              <p className='Loading'>Загрузка...</p>
             ) : gameAccounts.length ? (
               gameAccounts.map((acc) => (
                 <GameAccount

@@ -20,7 +20,7 @@ import MyProfile from './pages/Profiles/MyProfile.jsx';
 // Компонент для защиты маршрутов
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useContext(AuthContext);
-  if (isLoading) return <div>Загрузка...</div>;
+  if (isLoading) return <div className='Loading'>Загрузка...</div>;
   if (!isAuthenticated) {
     // Диспатчим событие unauthorized для открытия модала
     window.dispatchEvent(new CustomEvent('unauthorized'));

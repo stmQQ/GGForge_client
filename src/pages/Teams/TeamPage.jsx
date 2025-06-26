@@ -104,7 +104,7 @@ export default function TeamPage() {
   }
 
   if (!team) {
-    return <div>Загрузка...</div>;
+    return <div className='Loading'>Загрузка...</div>;
   }
 
   return (

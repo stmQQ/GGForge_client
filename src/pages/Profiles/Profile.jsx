@@ -141,7 +141,7 @@ export default function Profile() {
   }
 
   if (!user) {
-    return <div>Загрузка...</div>;
+    return <div className='Loading'>Загрузка...</div>;
   }
 
   return (

@@ -34,7 +34,7 @@ export default function GamesMain({ style = '', onSelectGame, query = '', limit 
   // Применяем limit: если 0, показываем все, иначе обрезаем до limit
   const displayedGames = limit === 0 ? filteredGames : filteredGames.slice(0, limit);
 
-  if (isLoading) return <div className="games__loading">Загрузка...</div>;
+  if (isLoading) return <div className='Loading'>Загрузка...</div>;
   if (error) return <div className="games__error">{error}</div>;
 
   return (

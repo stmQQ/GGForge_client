@@ -66,7 +66,7 @@ export default function AboutGame() {
     (t) => t.status === tournamentFilter
   );
 
-  if (isLoading) return <div>Загрузка...</div>;
+  if (isLoading) return <div className='Loading'>Загрузка...</div>;
   if (error) return <div className="error">{error}</div>;
   if (!gameInfo) return <p>Игра не найдена.</p>;
 

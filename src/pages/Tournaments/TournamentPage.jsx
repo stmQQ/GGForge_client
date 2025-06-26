@@ -640,7 +640,7 @@ export default function TournamentPage() {
     </div>
   );
 
-  if (isLoading) return <div>Загрузка...</div>;
+  if (isLoading) return <div className='Loading'>Загрузка...</div>;
   if (error) return <div className="error">{error}</div>;
   if (!tournament) return <div>Турнир не найден</div>;
 
