@@ -4,7 +4,7 @@ export const createTeam = async (title, description, logo) => {
     const formData = new FormData();
     formData.append('title', title);
     if (description) formData.append('description', description);
-    if (logo) formData.append('logo', logo);
+    if (logo) formData.append('logo_path', logo);
     return api.post('/teams/', formData, { headers: { 'Content-Type': 'multipart/form-data' }, });
 };
 
@@ -20,7 +20,7 @@ export const updateTeam = async (teamId, title, description, logo) => {
     const formData = new FormData();
     if (title) formData.append('title', title);
     if (description) formData.append('description', description);
-    if (logo) formData.append('logo', logo);
+    if (logo) formData.append('logo_path', logo);
     return api.patch(`/teams/${teamId}`, formData, { headers: { 'Content-Type': 'multipart/form-data' }, });
 };
 

@@ -27,9 +27,7 @@ export default function Friends() {
   const [disabledUsers, setDisabledUsers] = useState(new Set());
   const [error, setError] = useState("");
 
-  // Формирование URL для аватара
-  const getAvatarUrl = (avatar) =>
-    avatar ? `${API_URL}/${avatar}` : `${API_URL}/static/avatars/default.png`;
+  
 
   // Загрузка данных с сервера
   const fetchData = async () => {
@@ -40,7 +38,7 @@ export default function Friends() {
         (friendsRes.data || []).map((f) => ({
           id: f.id,
           name: f.name,
-          avatar: getAvatarUrl(f.avatar),
+          avatar: f.avatar,
         }))
       );
 
@@ -50,7 +48,7 @@ export default function Friends() {
         (requestsRes.data.incoming_requests || []).map((req) => ({
           id: req.from_user.id,
           name: req.from_user.name,
-          avatar: getAvatarUrl(req.from_user.avatar),
+          avatar: req.from_user.avatar,
           requestId: req.id,
         }))
       );
@@ -58,7 +56,7 @@ export default function Friends() {
         (requestsRes.data.outgoing_requests || []).map((req) => ({
           id: req.to_user.id,
           name: req.to_user.name,
-          avatar: getAvatarUrl(req.to_user.avatar),
+          avatar: req.to_user.avatar,
         }))
       );
     } catch (err) {
@@ -79,7 +77,7 @@ export default function Friends() {
         (res.data || []).map((user) => ({
           id: user.id,
           name: user.name,
-          avatar: getAvatarUrl(user.avatar),
+          avatar: user.avatar,
         }))
       );
       setError("");

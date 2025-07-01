@@ -40,7 +40,7 @@ export default function UserTournaments() {
         setTournaments(
           res.data.map((t) => ({
             id: t.id,
-            img: t.banner_url ? `${API_URL}/${t.banner_url}` : `${API_URL}/static/tournaments/default/trnt_${t.game.title.replace(/\s+/g, '')}.png`,
+            img: t.banner_url ? t.banner_url : `${API_URL}/static/tournaments/default/trnt_${t.game.title.replace(/\s+/g, '')}.png`,
             title: t.title,
             status: t.status,
             date: t.start_time,

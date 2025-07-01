@@ -1,6 +1,6 @@
 import './index.scss';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from './context/AuthContext';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from './components/Header/Header.jsx';
@@ -35,6 +35,37 @@ function App() {
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
   };
+
+  // frontend/src/utils/ping.js
+  const pingServer = async () => {
+    try {
+      const response = await fetch('https://ggforge-server.onrender.com/api/ping', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        console.log('Ping successful:', new Date().toISOString());
+      } else {
+        console.error('Ping failed:', response.status);
+      }
+    } catch (error) {
+      console.error('Ping error:', error);
+    }
+  };
+
+  // Запускаем пинг каждые 5 минут (300000 мс)
+  const startPing = () => {
+    pingServer(); // Первый пинг сразу
+    setInterval(pingServer, 300000); // Пинг каждые 5 минут
+  };
+
+  useEffect(() => {
+    startPing(); // Запускаем пинг при монтировании компонента
+  }, []);
+
+  // Экспортируем функцию для вызова в приложении
 
   return (
     <div className="App">

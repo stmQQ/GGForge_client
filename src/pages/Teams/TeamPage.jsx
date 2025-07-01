@@ -29,11 +29,11 @@ export default function TeamPage() {
 
   // Формирование URL для логотипа
   const getLogoUrl = (logoPath) =>
-    logoPath ? `${API_URL}${logoPath}` : `${API_URL}/static/team_logos/default.png`;
+    logoPath ? logoPath : `${API_URL}/static/team_logos/default.png`;
 
   // Формирование URL для аватара участника
   const getAvatarUrl = (avatar) =>
-    avatar ? `${API_URL}${avatar}` : `${API_URL}/static/avatars/default.png`;
+    avatar ? avatar : `${API_URL}/static/avatars/default.png`;
 
   // Загрузка данных команды
   const fetchTeam = async () => {

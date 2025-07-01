@@ -12,12 +12,11 @@ import SubmitButton from '../../components/Button/SubmitButton';
 import GameAccount from '../../components/Games/GameAccount';
 import UserInfo from '../../components/User/UserInfo';
 
-const API_URL = 'https://ggforge-server.onrender.com';
-const DEFAULT_AVATAR = `${API_URL}/static/avatars/default.png`;
+const DEFAULT_AVATAR = `static/avatars/default.png`;
 
 export default function MyProfile() {
   const { user, isAuthenticated, updateUser } = useContext(AuthContext);
-  const [avatar, setAvatar] = useState(DEFAULT_AVATAR);
+  const [avatar, setAvatar] = useState();
   const [formValues, setFormValues] = useState({
     name: '',
     currentPassword: '',
@@ -35,7 +34,7 @@ export default function MyProfile() {
   // Синхронизация данных пользователя
   useEffect(() => {
     if (user) {
-      setAvatar(user.avatar ? `${API_URL}/${user.avatar}` : DEFAULT_AVATAR);
+      setAvatar(user.avatar);
       setFormValues((prev) => ({ ...prev, name: user.name || '' }));
     }
   }, [user]);
@@ -51,7 +50,7 @@ export default function MyProfile() {
               id: acc.id,
               nickname: acc.connection?.external_user_url || 'Unknown',
               title: acc.game?.title || 'Unknown',
-              image: `${API_URL}/${acc.game?.logo_path}`,
+              image: `${acc.game?.logo_path}`,
             }))
           );
         })
@@ -67,7 +66,7 @@ export default function MyProfile() {
       setIsLoading(true);
       const res = await changeAvatar(file);
       const newAvatar = res.data.avatar;
-      const avatarUrl = newAvatar ? `${API_URL}/${newAvatar}` : DEFAULT_AVATAR;
+      const avatarUrl = newAvatar ? `${newAvatar}` : DEFAULT_AVATAR;
       setAvatar(avatarUrl);
       updateUser({ avatar: newAvatar });
       setError('');
@@ -149,6 +148,7 @@ export default function MyProfile() {
       setError(err.response?.data?.msg || 'Ошибка удаления аккаунта');
     }
   };
+
 
   if (!isAuthenticated) {
     return <div className="error-message">Пожалуйста, войдите в аккаунт</div>;

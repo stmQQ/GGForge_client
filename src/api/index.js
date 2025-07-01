@@ -9,6 +9,7 @@ const api = axios.create({
     baseURL: 'https://ggforge-server.onrender.com/api',
     headers: {
         'Content-Type': 'application/json',
+        'X-Timezone': Intl.DateTimeFormat().resolvedOptions().timeZone
     },
 });
 

@@ -33,11 +33,11 @@ export default function Profile() {
 
   // Формирование URL для аватара
   const getAvatarUrl = (avatar) =>
-    avatar ? `${API_URL}/${avatar}` : DEFAULT_AVATAR;
+    avatar ? avatar : DEFAULT_AVATAR;
 
   // Формирование URL для логотипа команды
   const getTeamLogoUrl = (logoPath) =>
-    logoPath ? `${API_URL}/${logoPath}` : `${API_URL}/static/team_logos/default.png`;
+    logoPath ? logoPath : `${API_URL}/static/team_logos/default.png`;
 
   // Загрузка данных
   const fetchData = async () => {
@@ -48,7 +48,7 @@ export default function Profile() {
       setUser({
         id: userData.id,
         name: userData.name,
-        avatar: getAvatarUrl(userData.avatar),
+        avatar: userData.avatar,
         email: userData.email || '',
         isOnline: userData.is_online || false,
         registration_date: new Date(userData.registration_date).toLocaleDateString('ru-RU'),
@@ -97,7 +97,7 @@ export default function Profile() {
           game: tournament.game?.title || 'Unknown',
           startTime: new Date(tournament.start_time).toLocaleString('ru-RU'),
           status: tournament.status,
-          banner: tournament.banner_url ? `${API_URL}/${tournament.banner_url}` : null,
+          banner: tournament.banner_url ? tournament.banner_url : null,
           prizeFund: tournament.prize_fund,
         }))
       );
@@ -143,6 +143,7 @@ export default function Profile() {
   if (!user) {
     return <div className='Loading'>Загрузка...</div>;
   }
+
 
   return (
     <div>

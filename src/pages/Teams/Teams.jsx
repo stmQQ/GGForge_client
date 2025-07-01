@@ -24,7 +24,7 @@ export default function Teams() {
 
   // Формирование URL для логотипа
   const getLogoUrl = (logoPath) =>
-    logoPath ? `${API_URL}/${logoPath}` : `${API_URL}/static/team_logos/default.png`;
+    logoPath ? logoPath : `${API_URL}/static/team_logos/default.png`;
 
   // Загрузка данных с сервера
   const fetchData = async () => {

@@ -65,7 +65,7 @@ export default function TournamentPage() {
     if (!id || id === "undefined") return defaultParticipant;
     const participant = await getProfile(id).catch(() => defaultParticipant);
     return participant.data && participant.data.avatar
-      ? { ...participant.data, avatar: `${API_URL}/${participant.data.avatar}` }
+      ? { ...participant.data, avatar: participant.data.avatar }
       : participant.data || defaultParticipant;
   };
 
@@ -73,7 +73,7 @@ export default function TournamentPage() {
     if (!id || id === "undefined") return defaultParticipant;
     const team = await getTeam(id).catch(() => defaultParticipant);
     return team.data && team.data.avatar
-      ? { ...team.data, avatar: `${API_URL}/${team.data.avatar}` }
+      ? { ...team.data, avatar: team.data.avatar }
       : team.data || defaultParticipant;
   };
 
@@ -134,8 +134,6 @@ export default function TournamentPage() {
             const round = acc.find((r) => r.letter === m.round_number);
 
             const [participant1Data, participant2Data] = await Promise.all([m.match.participant1_id && m.match.participant1_id !== "undefined" ? getParticipantUser(m.match.participant1_id) : m.match.team1_id && m.match.team1_id !== "undefined" ? getParticipantTeam(m.match.team1_id) : defaultParticipant, m.match.participant2_id && m.match.participant2_id !== "undefined" ? getParticipantUser(m.match.participant2_id) : m.match.team2_id && m.match.team2_id !== "undefined" ? getParticipantTeam(m.match.team2_id) : defaultParticipant,]);
-            if (participant1Data.user) participant1Data.user.avatar = `${API_URL}/${participant1Data.user.avatar}`
-            if (participant2Data.user) participant2Data.user.avatar = `${API_URL}/${participant2Data.user.avatar}`
             const match = {
               id: m.match.id,
               tournament_id: tournament.id,
@@ -221,7 +219,7 @@ export default function TournamentPage() {
         setTournament({
           id: tournamentData.id,
           title: tournamentData.title,
-          img: tournamentData.banner_url ? `${API_URL}/${tournamentData.banner_url}` : "/src/images/default-image.png",
+          img: tournamentData.banner_url ? tournamentData.banner_url : "/src/images/default-image.png",
           date: tournamentData.start_time,
           status: tournamentData.status,
           description: tournamentData.description || "Описание отсутствует",
@@ -231,7 +229,7 @@ export default function TournamentPage() {
             id: tournamentData.creator.id,
             name: tournamentData.creator.name,
             avatar: tournamentData.creator.avatar
-              ? `${API_URL}/${tournamentData.creator.avatar}`
+              ? tournamentData.creator.avatar
               : `${API_URL}/static/avatars/default.png`,
           },
           contact: tournamentData.contact || "@Organizer",
@@ -241,12 +239,12 @@ export default function TournamentPage() {
           participants: tournamentData.participants.map((p) => ({
             id: p.id,
             name: p.name,
-            avatar: p.avatar ? `${API_URL}/${p.avatar}` : `${API_URL}/static/avatars/default.png`,
+            avatar: p.avatar ? p.avatar : `${API_URL}/static/avatars/default.png`,
           })),
           teams: tournamentData.teams.map((t) => ({
             id: t.id,
             name: t.title,
-            avatar: t.avatar ? `${API_URL}/${t.avatar}` : `${API_URL}/static/avatars/default.png`,
+            avatar: t.avatar ? t.avatar : `${API_URL}/static/avatars/default.png`,
           })),
         });
 
@@ -301,9 +299,6 @@ export default function TournamentPage() {
                         ? getParticipantTeam(m.team2_id)
                         : defaultParticipant,
                   ]);
-
-                  if (participant1Data.user) participant1Data.user.avatar = `${API_URL}/${participant1Data.user.avatar}`;
-                  if (participant2Data.user) participant2Data.user.avatar = `${API_URL}/${participant2Data.user.avatar}`;
 
                   return {
                     id: m.id,
@@ -363,8 +358,6 @@ export default function TournamentPage() {
                   : defaultParticipant,
             ]);
 
-            if (participant1Data.user) participant1Data.user.avatar = `${API_URL}/${participant1Data.user.avatar}`;
-            if (participant2Data.user) participant2Data.user.avatar = `${API_URL}/${participant2Data.user.avatar}`;
             const match = {
               id: m.match.id,
               // winner_id: m.winner_id,
@@ -455,7 +448,7 @@ export default function TournamentPage() {
             id: r.user?.id || r.team?.id || r.id,
             name: r.user?.name || r.team?.title || "Неизвестно",
             avatar: r.user?.avatar || r.team?.avatar
-              ? `${API_URL}/${r.user?.avatar || r.team?.avatar}`
+              ? r.user?.avatar || r.team?.avatar
               : `${API_URL}/static/avatars/default.png`,
             prize: r.prize || "0",
           })),
@@ -491,7 +484,7 @@ export default function TournamentPage() {
           teamsResponse.data[0].member_teams.map((t) => ({
             id: t.id,
             name: t.title,
-            avatar: t.avatar ? `${API_URL}/${t.avatar}` : `${API_URL}/static/team_logos/default.png`,
+            avatar: t.avatar ? t.avatar : `${API_URL}/static/team_logos/default.png`,
           }))
         );
         setCreator(tournament?.manager?.id === currentUserId);
@@ -514,12 +507,12 @@ export default function TournamentPage() {
         participants: tournamentData.participants.map((p) => ({
           id: p.id,
           name: p.name,
-          avatar: p.avatar ? `${API_URL}/${p.avatar}` : `${API_URL}/static/avatars/default.png`,
+          avatar: p.avatar ? p.avatar : `${API_URL}/static/avatars/default.png`,
         })),
         teams: tournamentData.teams.map((t) => ({
           id: t.id,
           name: t.title,
-          avatar: t.avatar ? `${API_URL}/${t.avatar}` : `${API_URL}/static/team_logos/default.png`,
+          avatar: t.avatar ? t.avatar : `${API_URL}/static/team_logos/default.png`,
         })),
       }));
       setIsApplied(
@@ -774,7 +767,7 @@ export default function TournamentPage() {
                             <div key={row.id} className={`standings-row ${getRowClass(index)}`}>
                               <span>{row.place}</span>
                               <Link to={linkTo} className="standings-entity">
-                                <img src={`${API_URL}/${entity.avatar}`} alt="avatar" className="entity-avatar" />
+                                <img src={entity.avatar} alt="avatar" className="entity-avatar" />
                                 <span>{entity.name}</span>
                               </Link>
                               <span>{row.wins}</span>

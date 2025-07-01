@@ -15,7 +15,7 @@ export default function GamesMain({ style = '', onSelectGame, query = '', limit 
         const response = await getGames();
         const data = response.data.map(game => ({
           ...game,
-          image_path: game.image_path ? `${API_URL}/${game.image_path}` : null
+          image_path: game.image_path ? game.image_path : null
         }));
         setGames(data);
         setIsLoading(false);

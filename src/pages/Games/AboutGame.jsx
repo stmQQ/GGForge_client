@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getGameById } from "../../api/games";
 import { getTournamentsByGame } from "../../api/tournaments";
-import { API_URL } from "../../constants";
 import TitleH2 from "../../components/TitleH2/TitleH2";
 import "./aboutGame.scss";
 import TabSwitch from "../../components/TabSwitch/TabSwitch";
@@ -32,7 +31,7 @@ export default function AboutGame() {
           id: gameResponse.data.id,
           title: gameResponse.data.title,
           img: gameResponse.data.image_path
-            ? `${API_URL}/${gameResponse.data.image_path}`
+            ? gameResponse.data.image_path
             : "",
         });
 
@@ -45,7 +44,7 @@ export default function AboutGame() {
             id: tournament.id,
             title: tournament.title,
             img: tournament.banner_url
-              ? `${API_URL}/${tournament.banner_url}`
+              ? tournament.banner_url
               : "",
             date: tournament.start_time,
             inf: `Призовой фонд: ${tournament.prize_fund || "0"} ₽`,
