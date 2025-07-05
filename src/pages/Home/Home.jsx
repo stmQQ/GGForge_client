@@ -21,7 +21,7 @@ export default function Home() {
         setTournaments(
           response.data.data.map((t) => ({
             id: t.id,
-            img: `${API_URL}/${t.banner_url}`,
+            img: t.banner_url,
             title: t.title,
             date: t.start_time,
             inf: `Призовой фонд: ${t.prize_fund}₽` || '',

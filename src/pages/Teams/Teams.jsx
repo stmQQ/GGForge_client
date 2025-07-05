@@ -24,7 +24,7 @@ export default function Teams() {
 
   // Формирование URL для логотипа
   const getLogoUrl = (logoPath) =>
-    logoPath ? logoPath : `${API_URL}/static/team_logos/default.png`;
+    logoPath ? logoPath : 'https://storage.yandexcloud.net/ggforge-bucket/avatars/default.png';
 
   // Загрузка данных с сервера
   const fetchData = async () => {
@@ -59,6 +59,7 @@ export default function Teams() {
 
   // Создание команды
   const handleCreateTeam = async ({ teamName, description, logoFile }) => {
+    console.log(logoFile);
     try {
       await createTeam(teamName, description, logoFile);
       await fetchData();

@@ -8,7 +8,6 @@ import TitleH2 from "../../components/TitleH2/TitleH2.jsx";
 import ExternalLinkButton from "../Button/ExternalLinkButton.jsx";
 import SubmitButton from "../Button/SubmitButton.jsx";
 import TextInput from "../InputFields/TextInput.jsx";
-import { API_URL } from "../../constants.js";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { startMatch, completeMap, addHighlightUrl } from "../../api/tournaments.js";
 
@@ -45,7 +44,6 @@ export default function MatchCard({ match, className, onFinish, final_match = fa
     }
   }, [currentMatch]);
 
-  // console.log(currentMatch, match)
   const [isCreator, setCreator] = useState(currentMatch.creator === currentMatch.user_id);
   const [canBeStarted, setCanBeStarted] = useState(currentMatch.participant1?.id || currentMatch.participant2?.id)
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,11 +60,9 @@ export default function MatchCard({ match, className, onFinish, final_match = fa
 
   if (currentMatch.participant1?.user) {
     currentMatch.participant1 = currentMatch.participant1.user
-    currentMatch.participant1.avatar = `${API_URL}/${currentMatch.participant1.avatar}`
   }
   if (currentMatch.participant2?.user) {
     currentMatch.participant2 = currentMatch.participant2.user
-    currentMatch.participant2.avatar = `${API_URL}/${currentMatch.participant2.avatar}`
   }
   const openModal = () => {
     setIsModalOpen(true);

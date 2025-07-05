@@ -50,7 +50,7 @@ export default function MyProfile() {
               id: acc.id,
               nickname: acc.connection?.external_user_url || 'Unknown',
               title: acc.game?.title || 'Unknown',
-              image: `${acc.game?.logo_path}`,
+              image: acc.game?.logo_path,
             }))
           );
         })
@@ -124,10 +124,10 @@ export default function MyProfile() {
       setGameAccounts((prev) => [
         ...prev,
         {
-          id: res.data.id,
+          id: res.data.account.id,
           nickname: gameNickname,
           title: selectedGame.title,
-          image: DEFAULT_AVATAR,
+          image: selectedGame.logo_path,
         },
       ]);
       setIsModalOpen(false);

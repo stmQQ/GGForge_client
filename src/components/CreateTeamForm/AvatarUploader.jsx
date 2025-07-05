@@ -13,6 +13,7 @@ export default function AvatarUploader({ onChange }) {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
+      console.log(file);
       setPreviewUrl(imageUrl);
       onChange(file); // передаём выбранный файл наружу
     }
@@ -21,11 +22,11 @@ export default function AvatarUploader({ onChange }) {
   return (
     <div className="avatar-uploader" onClick={handleClick}>
       {previewUrl ? (
-        <img  src={previewUrl} alt="avatar preview" className="avatar-image" />
+        <img src={previewUrl} alt="avatar preview" className="avatar-image" />
       ) : (
         <div className="avatar-placeholder">+</div>
       )}
-      <input  
+      <input
         type="file"
         accept="image/*"
         ref={fileInputRef}

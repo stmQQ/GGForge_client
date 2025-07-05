@@ -3,6 +3,7 @@ import api from './index';
 export const createTeam = async (title, description, logo) => {
     const formData = new FormData();
     formData.append('title', title);
+    console.log(logo);
     if (description) formData.append('description', description);
     if (logo) formData.append('logo_path', logo);
     return api.post('/teams/', formData, { headers: { 'Content-Type': 'multipart/form-data' }, });

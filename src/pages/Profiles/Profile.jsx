@@ -33,7 +33,9 @@ export default function Profile() {
 
   // Формирование URL для аватара
   const getAvatarUrl = (avatar) =>
-    avatar ? avatar : DEFAULT_AVATAR;
+    avatar === "/static/avatars/default.png"
+      ? `${API_URL}/static/avatars/default.png`
+      : avatar || `${API_URL}/static/avatars/default.png`;
 
   // Формирование URL для логотипа команды
   const getTeamLogoUrl = (logoPath) =>
@@ -63,7 +65,7 @@ export default function Profile() {
           id: acc.id,
           nickname: acc.external_user_url || 'Unknown',
           title: acc.game?.title || 'Unknown',
-          image: DEFAULT_AVATAR,
+          image: acc.game.logo_path,
         }))
       );
 

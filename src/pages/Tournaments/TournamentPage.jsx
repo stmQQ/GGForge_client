@@ -58,7 +58,8 @@ export default function TournamentPage() {
   const defaultParticipant = {
     id: null,
     name: "TBD",
-    avatar: `${API_URL}/static/avatars/default.png`,
+    avatar: 'https://storage.yandexcloud.net/ggforge-bucket/avatars/default.png'
+    ,
   };
 
   const getParticipantUser = async (id) => {
@@ -229,8 +230,6 @@ export default function TournamentPage() {
             id: tournamentData.creator.id,
             name: tournamentData.creator.name,
             avatar: tournamentData.creator.avatar
-              ? tournamentData.creator.avatar
-              : `${API_URL}/static/avatars/default.png`,
           },
           contact: tournamentData.contact || "@Organizer",
           highlight_url: tournamentData.highlight_url || "",
@@ -239,12 +238,12 @@ export default function TournamentPage() {
           participants: tournamentData.participants.map((p) => ({
             id: p.id,
             name: p.name,
-            avatar: p.avatar ? p.avatar : `${API_URL}/static/avatars/default.png`,
+            avatar: p.avatar
           })),
           teams: tournamentData.teams.map((t) => ({
             id: t.id,
             name: t.title,
-            avatar: t.avatar ? t.avatar : `${API_URL}/static/avatars/default.png`,
+            avatar: t.avatar
           })),
         });
 
@@ -449,7 +448,8 @@ export default function TournamentPage() {
             name: r.user?.name || r.team?.title || "Неизвестно",
             avatar: r.user?.avatar || r.team?.avatar
               ? r.user?.avatar || r.team?.avatar
-              : `${API_URL}/static/avatars/default.png`,
+              : 'https://storage.yandexcloud.net/ggforge-bucket/avatars/default.png'
+            ,
             prize: r.prize || "0",
           })),
         });
@@ -484,7 +484,7 @@ export default function TournamentPage() {
           teamsResponse.data[0].member_teams.map((t) => ({
             id: t.id,
             name: t.title,
-            avatar: t.avatar ? t.avatar : `${API_URL}/static/team_logos/default.png`,
+            avatar: t.avatar
           }))
         );
         setCreator(tournament?.manager?.id === currentUserId);
@@ -507,12 +507,12 @@ export default function TournamentPage() {
         participants: tournamentData.participants.map((p) => ({
           id: p.id,
           name: p.name,
-          avatar: p.avatar ? p.avatar : `${API_URL}/static/avatars/default.png`,
+          avatar: p.avatar
         })),
         teams: tournamentData.teams.map((t) => ({
           id: t.id,
           name: t.title,
-          avatar: t.avatar ? t.avatar : `${API_URL}/static/team_logos/default.png`,
+          avatar: t.avatar
         })),
       }));
       setIsApplied(
@@ -760,7 +760,7 @@ export default function TournamentPage() {
                           <span>Очки</span>
                         </div>
                         {group.group_rows.map((row, index) => {
-                          const entity = row.team || row.user || { name: "TBD", avatar: "static/avatars/default.png" };
+                          const entity = row.team || row.user || { name: "TBD", avatar: "https://storage.yandexcloud.net/ggforge-bucket/avatars/default.png" };
                           const linkTo = row.team ? `/team/${entity.id}` : row.user ? `/profile/${entity.id}` : null;
                           const points = row.wins * 2 + row.draws;
                           return (

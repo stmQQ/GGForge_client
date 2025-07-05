@@ -14,6 +14,7 @@ export default function CreateTeamForm({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!teamName.trim()) return; // Простая валидация
+    console.log(logoFile);
     onSubmit({ teamName, description, logoFile });
     setTeamName("");
     setDescription("");
